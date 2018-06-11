@@ -12,13 +12,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div>Cálculo do IMC</div>
-        <form name="Envia" action="Calcular" method="POST">  
+        <div>Listagem</div>
+        <form name="Envia" action="Listar" method="POST">  
             <br>
-            <label> Peso </label> 
-            <input type="text" name="peso" value="0" size="10" />
-            <br>
-            <label> Altura </label>  <input type="text" name="altura" value="0" size="10" /> <br>
+            <label> Listar status  </label> 
+            <br>            
             <input type="submit" value="Enviar" name="enviar" />
 
         </form> 

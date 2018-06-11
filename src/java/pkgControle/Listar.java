@@ -1,6 +1,9 @@
 package pkgControle;
 
+import DAOs.DAOStatus;
+import Entidades.Status;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -12,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author radames
  */
-public class Calcular extends HttpServlet {
+public class Listar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -25,37 +28,26 @@ public class Calcular extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        double p = Double.valueOf(request.getParameter("peso"));
-        double a = Double.valueOf(request.getParameter("altura"));
-        double imc = p / (a * a);
-
-        String situacao;
-        if (imc < 18.5) {
-            situacao = "abaixo do peso ideal";
-        } else if (imc < 24.9) {
-            situacao = "peso ideal";
-        } else if (imc < 29.9) {
-            situacao = "sobre peso";
-        } else if (imc < 34.9) {
-            situacao = "Obesidade grau I";
-        } else if (imc < 39.9) {
-            situacao = "Obesidade grau II";
-        } else {
-            situacao = "Obesidade grau III";
+       
+        DAOStatus daoStatus = new DAOStatus();
+        List<Status> listaStatus = daoStatus.list();
+        
+        String texto = "";
+        for (int i = 0; i < listaStatus.size(); i++) {
+            texto+=listaStatus.get(i).getNomeStatus()+"<br>";
         }
-
+      
         //    response.sendRedirect("Resposta.jsp?imc="+String.valueOf(imc));      
         //enviar para Resposta.jsp
-        request.setAttribute("peso", String.valueOf(p));
-        request.setAttribute("altura", String.valueOf(a));
-        request.setAttribute("imc", String.valueOf(imc));
-        request.setAttribute("situacao", situacao);
+        request.setAttribute("listaComStatus", String.valueOf(texto));
+       
 
         try {
             request.getRequestDispatcher("Resposta.jsp").forward(request, response);
         } catch (IOException ex) {
-            Logger.getLogger(Calcular.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Listar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        // response.sendRedirect("Resposta.jsp);      
         // response.sendRedirect("Resposta.jsp);      
 
     }

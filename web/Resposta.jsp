@@ -13,23 +13,11 @@
     </head>
     <body>
         <h1>Resposta  - IMC Calculado</h1>
-        <label> Peso = </label>
-        <%=request.getAttribute("peso")%>
+        <label> Os Status são: <br> </label>
+        <%=request.getAttribute("listaComStatus")%>
         <br>
-        
-        <label> Altura </label>
-        <%=request.getAttribute("altura")%>
-        <br>
-        
-        <label> IMC = </label>
-        <%=request.getAttribute("imc")%>
-        <br>
-         <label> Situacao = </label>
-        <%=request.getAttribute("situacao")%>
-        <br>
-        
-        <br>
-        <br>
+       
+       
          <form name="Envia" action="GUI.jsp" method="POST">
             <input type="submit" value="Voltar" name="enviar" />            
         </form> 
